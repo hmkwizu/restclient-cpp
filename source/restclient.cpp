@@ -47,6 +47,10 @@ RestClient::response RestClient::get(const std::string& url, const size_t timeou
   curl = curl_easy_init();
   if (curl)
   {
+
+  	/** Tell libcurl to follow redirection */
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+
     /** set basic authentication if present*/
     if(RestClient::user_pass.length()>0){
       curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
